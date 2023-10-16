@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.cart-item-count {
+  width: 20px;
+  height: 20px;
+  right: -5px;
+}
+
+.product {
+  width: 30%;
+}
