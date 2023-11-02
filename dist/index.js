@@ -1,36 +1,38 @@
-"use strict";
-const data = "../data.json";
+import { products } from "./data.js";
 const cartItemCountElem = document.querySelector(".cart-item-count");
-let cartItemCount = 0;
-cartItemCountElem.textContent = String(cartItemCount);
-const getData = () => {
-    fetch(data)
-        .then((res) => {
-        if (!res.ok) {
-            console.log("Network response was not ok");
-        }
-        return res.json();
-    })
-        .then((data) => {
-        displayData(data.products);
-    })
-        .catch((err) => {
-        console.log("Error: ", err);
-    });
+const cart = [];
+let total = 0;
+cartItemCountElem.textContent = total.toString();
+const addToCart = (product) => {
+    const existProd = cart.filter((prod) => prod.name === product.name);
+    if (existProd) {
+        product.quantity++;
+    }
+    else {
+        cart.push(product);
+        total++;
+        cartItemCountElem.textContent = total.toString();
+    }
+};
+const openCart = () => {
+    console.log(cart);
 };
 const displayData = (data) => {
     const content = document.querySelector(".content");
     content.innerHTML = `
-        ${data.map((product) => (`
-            <div class="product border text-center">
-                <img src="${product.img}" class="w-100" />
-                <h1>${product.name}</h1>
-                <p>${product.description}</p>
-                <button class="btn btn-primary">Add to cart</button>
+        ${data.map((product) => {
+        const { image, name, price } = product;
+        return (`
+            <div class="w-25 border text-center pb-3">
+                <div class="product-img">
+                    <img src="${image}" class="w-100" />
+                </div>
+                <h1 class="fs-2">${name}</h1>
+                <p class="fs-5 text-secondary">$${price}</p>
+                <button class="py-2 btn btn-success w-75" onClick={addToCart(${JSON.stringify(product)})}>Add to cart</button>
             </div>
-        `))}
+        `);
+    })}
     `;
 };
-getData();
-const addToCart = () => {
-};
+displayData(products);
