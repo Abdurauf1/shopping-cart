@@ -64,14 +64,16 @@ let total: number = 0;
 cartItemCountElem.textContent = total.toString();
 
 const addToCart = (product: Product): void => {
-    const existProd = cart.filter((prod: Product) => prod.name === product.name);
-    if (existProd) {
-        product.quantity++;
+    const addedProd = cart.find((p: Product) => p.name === product.name)
+
+    if (addedProd) {
+        addedProd.quantity++;
     } else {
         cart.push(product);
+        product.quantity++;
         total++;
-        cartItemCountElem.textContent = total.toString();
     }
+    cartItemCountElem.textContent = total.toString();
 }
 
 const openCart = (): void => {
@@ -86,15 +88,15 @@ const displayData = (data: Product[]): void => {
         const { image, name, price } = product;
         return (
             `
-            <div class="w-25 border text-center pb-3">
-                <div class="d-flex align-items-center product-img">
-                    <img src="${image}" class="w-100" />
+                <div class="w-25 border text-center pb-3">
+                    <div class="d-flex align-items-center product-img">
+                        <img src="${image}" class="w-100" />
+                    </div>
+                    <h1 class="fs-2">${name}</h1>
+                    <p class="fs-5 text-secondary">$${price}</p>
+                    <button class="rounded-0 py-2 btn btn-success w-75" onclick="addToCart(${JSON.stringify(product).replace(/"/g, "&quot;")})">Add to cart</button>
                 </div>
-                <h1 class="fs-2">${name}</h1>
-                <p class="fs-5 text-secondary">$${price}</p>
-                <button class="rounded-0 py-2 btn btn-success w-75" onClick="${addToCart(product)}">Add to cart</button>
-            </div>
-        `
+            `
         )
     }).join("")}
     `;
