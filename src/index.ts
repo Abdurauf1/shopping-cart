@@ -2,49 +2,49 @@ const products: Product[] = [
     {
         name: "Airpods",
         price: 69,
-        image: "../images/airpods.png",
+        image: "../assets/images/airpods.png",
         quantity: 0
     },
     {
         name: "Earbuds",
         price: 35,
-        image: "../images/earbuds.png",
+        image: "../assets/images/earbuds.png",
         quantity: 0
     },
     {
         name: "iPhone Case",
         price: 49,
-        image: "../images/iphone_case.png",
+        image: "../assets/images/iphone_case.png",
         quantity: 0
     },
     {
         name: "iPhone 15",
         price: 899,
-        image: "../images/iphone.png",
+        image: "../assets/images/iphone.png",
         quantity: 0
     },
     {
         name: "Poco",
         price: 129,
-        image: "../images/poco.png",
+        image: "../assets/images/poco.png",
         quantity: 0
     },
     {
         name: "Redmi",
         price: 280,
-        image: "../images/redmi.png",
+        image: "../assets/images/redmi.png",
         quantity: 0
     },
     {
         name: "Samsung",
         price: 75,
-        image: "../images/samsung.png",
+        image: "../assets/images/samsung.png",
         quantity: 0
     },
     {
         name: "USB",
         price: 25,
-        image: "../images/usb.png",
+        image: "../assets/images/usb.png",
         quantity: 0
     },
 ]
@@ -53,7 +53,7 @@ interface Product {
     name: string,
     price: number,
     image: string,
-    quantity: number
+    quantity: number,
 }
 
 const cartItemCountElem = document.querySelector(".cart-item-count") as HTMLSpanElement;
@@ -88,13 +88,15 @@ const displayData = (data: Product[]): void => {
         const { image, name, price } = product;
         return (
             `
-                <div class="w-25 border text-center pb-3">
-                    <div class="d-flex align-items-center product-img">
-                        <img src="${image}" class="w-100" />
+                <div class="overflow-hidden card d-flex flex-column align-items-center justify-content-between col-md-3 border text-center pb-3">
+                    <div class="overflow-hidden d-flex align-items-center justify-content-center">
+                        <img src="${image}" class="w-75" />
                     </div>
-                    <h1 class="fs-2">${name}</h1>
-                    <p class="fs-5 text-secondary">$${price}</p>
-                    <button class="rounded-0 py-2 btn btn-success w-75" onclick="addToCart(${JSON.stringify(product).replace(/"/g, "&quot;")})">Add to cart</button>
+                    <div class="w-100">
+                        <h1 class="fs-2">${name}</h1>
+                        <p class="fs-5 text-secondary">$${price}</p>
+                        <button class="rounded-0 py-2 btn btn-success w-100" onclick="addToCart(${JSON.stringify(product).replace(/"/g, "&quot;")})">Add to cart</button>
+                    </div>
                 </div>
             `
         )
