@@ -88,7 +88,7 @@ const displayData = (data: Product[]): void => {
         const { image, name, price } = product;
         return (
             `
-                <div class="overflow-hidden card d-flex flex-column align-items-center justify-content-between col-md-3 border text-center pb-3">
+                <div class="card col-xs-12 col-sm-6 col-md-4 overflow-hidden d-flex flex-column align-items-center justify-content-between border text-center pb-3">
                     <div class="overflow-hidden d-flex align-items-center justify-content-center">
                         <img src="${image}" class="w-75" />
                     </div>
