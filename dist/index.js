@@ -8,13 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+let productCount = 0;
 let data = [];
 let cart = [];
+const productCountEl = document.querySelector(".product-count");
+productCountEl.textContent = productCount.toString();
 const fetchProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield fetch("https://fakestoreapi.com/products/");
     data = yield response.json();
     displayCards();
-    console.log(data);
 });
 const displayCards = () => {
     const cardsWrapper = document.querySelector(".cards-wrapper");

@@ -1,17 +1,28 @@
-let data: any = []
-let cart: any = []
+interface Product {
+    id: number
+    title: string
+    price: number
+    image: string
+    quantity: number
+}
 
-const fetchProducts = async () => {
+let productCount: number = 0;
+let data: Product[] = [];
+let cart: Product[] = [];
+
+const productCountEl = document.querySelector(".product-count") as HTMLSpanElement
+productCountEl.textContent = productCount.toString()
+
+const fetchProducts = async (): Promise<void> => {
     const response = await fetch("https://fakestoreapi.com/products/");
     data = await response.json()
     displayCards()
-    console.log(data);
 }
 
 const displayCards = (): void => {
-    const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLElement
+    const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLDivElement
 
-    data.forEach((product: any) => {
+    data.forEach((product: Product) => {
         cardsWrapper.innerHTML += `
             <div class="card">
                 <img src="${product.image}" alt="product-image" />
@@ -28,3 +39,4 @@ fetchProducts()
 const addToCart = (): void => {
     console.log(cart);
 }
+
