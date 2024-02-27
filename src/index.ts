@@ -10,7 +10,8 @@ let productCount: number = 0;
 let data: Product[] = [];
 let cart: Product[] = [];
 
-const productCountEl = document.querySelector(".product-count") as HTMLSpanElement
+const productCountEl = document.querySelector(".product-count") as HTMLSpanElement;
+
 productCountEl.textContent = productCount.toString()
 
 const fetchProducts = async (): Promise<void> => {
@@ -20,23 +21,41 @@ const fetchProducts = async (): Promise<void> => {
 }
 
 const displayCards = (): void => {
-    const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLDivElement
-
     data.forEach((product: Product) => {
-        cardsWrapper.innerHTML += `
-            <div class="card">
-                <img src="${product.image}" alt="product-image" />
-                <p>${product.title}</p>
-                <p>$${product.price}</p>
-                <button onClick="addToCart()">Add To Cart</button>
-            </div>
-            `;
+        const card = document.createElement("div") as HTMLDivElement;
+        const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLDivElement;
+
+        card.classList.add("card")
+        card.innerHTML += `
+            <img src="${product.image}" alt="product-image" />
+            <p>${product.title}</p>
+            <p>$${product.price}</p>
+            <button class="add-to-cart-btn">Add To Cart</button>
+        `;
+        card.querySelector(".add-to-cart-btn")?.addEventListener("click", () => addToCart(product));
+        cardsWrapper.appendChild(card);
     })
 }
 
 fetchProducts()
 
-const addToCart = (): void => {
-    console.log(cart);
+const addToCart = (product: Product): void => {
+    const existingProduct = cart.find((cartItem: Product) => cartItem.id === product.id)
+
+    if (existingProduct) {
+        existingProduct.quantity++
+    } else {
+        cart.push({ ...product, quantity: 1 })
+        productCount++
+    }
+
+    productCountEl.textContent = productCount.toString()
 }
 
+const openCartBtn = document.querySelector(".open-cart-btn") as HTMLButtonElement;
+
+openCartBtn.addEventListener("click", () => openCart())
+
+const openCart = () => {
+    console.log(cart);
+}

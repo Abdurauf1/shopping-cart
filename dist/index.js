@@ -19,19 +19,35 @@ const fetchProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     displayCards();
 });
 const displayCards = () => {
-    const cardsWrapper = document.querySelector(".cards-wrapper");
     data.forEach((product) => {
-        cardsWrapper.innerHTML += `
-            <div class="card">
-                <img src="${product.image}" alt="product-image" />
-                <p>${product.title}</p>
-                <p>$${product.price}</p>
-                <button onClick="addToCart()">Add To Cart</button>
-            </div>
-            `;
+        var _a;
+        const card = document.createElement("div");
+        const cardsWrapper = document.querySelector(".cards-wrapper");
+        card.classList.add("card");
+        card.innerHTML += `
+            <img src="${product.image}" alt="product-image" />
+            <p>${product.title}</p>
+            <p>$${product.price}</p>
+            <button class="add-to-cart-btn">Add To Cart</button>
+        `;
+        (_a = card.querySelector(".add-to-cart-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => addToCart(product));
+        cardsWrapper.appendChild(card);
     });
 };
 fetchProducts();
-const addToCart = () => {
+const addToCart = (product) => {
+    const existingProduct = cart.find((cartItem) => cartItem.id === product.id);
+    if (existingProduct) {
+        existingProduct.quantity++;
+    }
+    else {
+        cart.push(Object.assign(Object.assign({}, product), { quantity: 1 }));
+        productCount++;
+    }
+    productCountEl.textContent = productCount.toString();
+};
+const openCartBtn = document.querySelector(".open-cart-btn");
+openCartBtn.addEventListener("click", () => openCart());
+const openCart = () => {
     console.log(cart);
 };
