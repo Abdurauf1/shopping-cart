@@ -25,11 +25,15 @@ const displayCards = () => {
         const cardsWrapper = document.querySelector(".cards-wrapper");
         card.classList.add("card");
         card.innerHTML += `
-            <img src="${product.image}" alt="product-image" />
-            <p>${product.title}</p>
-            <p>$${product.price}</p>
-            <button class="add-to-cart-btn">Add To Cart</button>
+            <div class="card-description">
+                <div class="product-img"></div>
+                <p class="product-title">${product.title}</p>
+                <p class="product-price">$${product.price}</p>
+                <button class="add-to-cart-btn">Add To Cart</button>
+            </div>
         `;
+        const img = card.querySelector(".product-img");
+        img.style.backgroundImage = `url(${product.image})`;
         (_a = card.querySelector(".add-to-cart-btn")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => addToCart(product));
         cardsWrapper.appendChild(card);
     });

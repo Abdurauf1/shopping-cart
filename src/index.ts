@@ -26,12 +26,19 @@ const displayCards = (): void => {
         const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLDivElement;
 
         card.classList.add("card")
+
         card.innerHTML += `
-            <img src="${product.image}" alt="product-image" />
-            <p>${product.title}</p>
-            <p>$${product.price}</p>
-            <button class="add-to-cart-btn">Add To Cart</button>
+            <div class="card-description">
+                <div class="product-img"></div>
+                <p class="product-title">${product.title}</p>
+                <p class="product-price">$${product.price}</p>
+                <button class="add-to-cart-btn">Add To Cart</button>
+            </div>
         `;
+        
+        const img = card.querySelector(".product-img") as HTMLDivElement
+        img.style.backgroundImage = `url(${product.image})`
+
         card.querySelector(".add-to-cart-btn")?.addEventListener("click", () => addToCart(product));
         cardsWrapper.appendChild(card);
     })

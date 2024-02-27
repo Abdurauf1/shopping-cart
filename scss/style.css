@@ -10,6 +10,10 @@
   margin: 0 auto;
 }
 
+.w-50 {
+  width: 50%;
+}
+
 nav {
   width: 100%;
   background-color: #fff;
@@ -41,20 +45,48 @@ nav div ul li button {
 }
 .cards-wrapper .card {
   width: 300px;
-  height: 400px;
-  border: 1px solid #000;
+  height: 300px;
   padding: 10px;
   overflow: hidden;
+  box-shadow: -1px 8px 9px 0px rgba(34, 60, 80, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  border-radius: 5px;
 }
-.cards-wrapper .card img {
-  width: auto;
-  height: 50%;
-  margin: 0 auto;
-}
-.cards-wrapper .card button {
+.cards-wrapper .card .product-img {
   width: 100%;
-  padding: 5px 10px;
+  height: 100px;
+  background-size: cover;
+}
+.cards-wrapper .card .card-description {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 10px;
+}
+.cards-wrapper .card .card-description .product-title {
+  font-size: 16px;
+}
+.cards-wrapper .card .card-description .product-price {
+  color: rgb(77, 255, 77);
+  font-weight: bold;
+  font-size: 20px;
+}
+.cards-wrapper .card .card-description button {
+  width: 100%;
+  padding: 17px 0;
+  font-size: 16px;
   background-color: #fff;
   border-radius: 5px;
   cursor: pointer;
+  color: #fff;
+  background-color: #40a2e3;
+  border: none;
+  transition-duration: 0.3s;
+}
+.cards-wrapper .card .card-description button:hover {
+  background-color: #1d97e7;
 }/*# sourceMappingURL=style.css.map */
