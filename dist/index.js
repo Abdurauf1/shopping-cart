@@ -65,11 +65,14 @@ const closeCart = () => {
 openCartBtn.addEventListener("click", () => openCart());
 closeCartBtn.addEventListener("click", () => closeCart());
 const displayCartItems = () => {
+    modalBox.innerHTML = "";
     cart.forEach((cartItem) => {
         modalBox.innerHTML += `
             <div class="cart-item">
                 <img src="${cartItem.image}" alt="product-img" />
-                <p>hello</p>
+                <p>${cartItem.title}</p>
+                <span>${cartItem.quantity}</span>
+                <i class="bi bi-trash3"></i>
             </div>
         `;
     });

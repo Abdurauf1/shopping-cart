@@ -76,14 +76,18 @@ openCartBtn.addEventListener("click", () => openCart());
 closeCartBtn.addEventListener("click", () => closeCart());
 
 const displayCartItems = (): void => {
+    modalBox.innerHTML = "";
+
     cart.forEach((cartItem: Product) => {
         modalBox.innerHTML += `
             <div class="cart-item">
                 <img src="${cartItem.image}" alt="product-img" />
-                <p>hello</p>
+                <p>${cartItem.title}</p>
+                <span>${cartItem.quantity}</span>
+                <i class="bi bi-trash3"></i>
             </div>
         `;
-    })
-}
+    });
+};
 
-displayCartItems()
+displayCartItems();
