@@ -10,8 +10,8 @@
   margin: 0 auto;
 }
 
-.w-50 {
-  width: 50%;
+.d-none {
+  display: none !important;
 }
 
 nav {
@@ -19,6 +19,9 @@ nav {
   background-color: #fff;
   padding: 20px 0;
   box-shadow: -1px 8px 9px 0px rgba(34, 60, 80, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 99;
 }
 nav div {
   display: flex;
@@ -30,33 +33,49 @@ nav div ul {
   align-items: center;
   list-style: none;
 }
-nav div ul li button {
-  background-color: #fff;
-  padding: 5px 10px;
-  border-radius: 3px;
+nav div ul li {
+  position: relative;
   cursor: pointer;
+}
+nav div ul li .product-count {
+  padding: 2px;
+  display: grid;
+  place-items: center;
+  background-color: yellow;
+  border-radius: 50%;
+  position: absolute;
+  top: -7px;
+  left: 10px;
+}
+nav div ul li .bi-cart2 {
+  font-size: 25px;
 }
 
 .cards-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 30px;
+  grid-template-columns: auto auto auto;
   padding: 30px 0;
 }
 .cards-wrapper .card {
-  width: 300px;
+  width: 320px;
   height: 400px;
   padding: 10px;
   overflow: hidden;
   box-shadow: -1px 8px 9px 0px rgba(34, 60, 80, 0.2);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
   position: relative;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .cards-wrapper .card .product-img {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+.cards-wrapper .card .product-img img {
   height: 50%;
 }
 .cards-wrapper .card .card-description {
@@ -92,8 +111,42 @@ nav div ul li button {
 .cards-wrapper .card .card-description button:hover {
   background-color: #1d97e7;
 }
-@media screen and (max-width: 500px) {
-  .cards-wrapper .card {
-    width: 100%;
-  }
+
+.cart-modal-wrapper {
+  background-color: rgba(0, 0, 0, 0.8);
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: grid;
+  place-items: center;
+}
+.cart-modal-wrapper .bi-x {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  font-size: 40px;
+  cursor: pointer;
+  color: #fff;
+}
+.cart-modal-wrapper .modal-box {
+  width: 80%;
+  height: 80%;
+  background-color: #fff;
+  display: flex;
+  justify-content: center;
+  border-radius: 5px;
+  padding: 20px 0;
+}
+.cart-modal-wrapper .modal-box .cart-item {
+  width: 90%;
+  height: 150px;
+  border-radius: 5px;
+  box-shadow: -1px 8px 9px 0px rgba(34, 60, 80, 0.2);
+}
+.cart-modal-wrapper .modal-box .cart-item img {
+  width: 100px;
+  height: 100px;
 }/*# sourceMappingURL=style.css.map */

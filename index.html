@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shopping Cart</title>
     <link rel="stylesheet" href="scss/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -13,9 +14,9 @@
         <div class="container">
             <h1>Shopping Cart</h1>
             <ul>
-                <li>
+                <li class="open-cart-btn">
                     <span class="product-count"></span>
-                    <button class="open-cart-btn">Cart</button>
+                    <i class="bi bi-cart2"></i>
                 </li>
             </ul>
         </div>
@@ -25,6 +26,10 @@
         <div class="cards-wrapper"></div>
     </div>
 
+    <div class="cart-modal-wrapper d-none">
+        <i class="bi bi-x"></i>
+        <div class="modal-box"></div>
+    </div>
     <script src="dist/index.js"></script>
 </body>
 

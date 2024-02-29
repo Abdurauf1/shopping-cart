@@ -8,10 +8,15 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+;
+const productCountEl = document.querySelector(".product-count");
+const openCartBtn = document.querySelector(".open-cart-btn");
+const closeCartBtn = document.querySelector(".bi-x");
+const cartModalWrapper = document.querySelector(".cart-modal-wrapper");
+const modalBox = document.querySelector(".modal-box");
 let productCount = 0;
 let data = [];
 let cart = [];
-const productCountEl = document.querySelector(".product-count");
 productCountEl.textContent = productCount.toString();
 const fetchProducts = () => __awaiter(void 0, void 0, void 0, function* () {
     const response = yield fetch("https://fakestoreapi.com/products/");
@@ -25,7 +30,9 @@ const displayCards = () => {
         const cardsWrapper = document.querySelector(".cards-wrapper");
         card.classList.add("card");
         card.innerHTML += `
-            <img src="${product.image}" class="product-img" />
+            <div class="product-img">
+                <img src="${product.image}" />
+            </div>
             <div class="card-description">
                 <p class="product-title">${product.title}</p>
                 <p class="product-price">$${product.price}</p>
@@ -48,8 +55,23 @@ const addToCart = (product) => {
     }
     productCountEl.textContent = productCount.toString();
 };
-const openCartBtn = document.querySelector(".open-cart-btn");
-openCartBtn.addEventListener("click", () => openCart());
 const openCart = () => {
-    console.log(cart);
+    cartModalWrapper.classList.remove("d-none");
+    displayCartItems();
 };
+const closeCart = () => {
+    cartModalWrapper.classList.add("d-none");
+};
+openCartBtn.addEventListener("click", () => openCart());
+closeCartBtn.addEventListener("click", () => closeCart());
+const displayCartItems = () => {
+    cart.forEach((cartItem) => {
+        modalBox.innerHTML += `
+            <div class="cart-item">
+                <img src="${cartItem.image}" alt="product-img" />
+                <p>hello</p>
+            </div>
+        `;
+    });
+};
+displayCartItems();
