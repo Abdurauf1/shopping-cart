@@ -10,6 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 ;
 const productCountEl = document.querySelector(".product-count");
+const cardsWrapper = document.querySelector(".cards-wrapper");
 const openCartBtn = document.querySelector(".open-cart-btn");
 const closeCartBtn = document.querySelector(".bi-x");
 const cartModalWrapper = document.querySelector(".cart-modal-wrapper");
@@ -27,7 +28,6 @@ const displayCards = () => {
     data.forEach((product) => {
         var _a;
         const card = document.createElement("div");
-        const cardsWrapper = document.querySelector(".cards-wrapper");
         card.classList.add("card");
         card.innerHTML += `
             <div class="product-img">
@@ -55,6 +55,27 @@ const addToCart = (product) => {
     }
     productCountEl.textContent = productCount.toString();
 };
+const displayCartItems = () => {
+    modalBox.innerHTML = "";
+    if (cart.length > 0) {
+        cart.forEach((cartItem) => {
+            modalBox.innerHTML += `
+                <div class="cart-item">
+                    <img src="${cartItem.image}" alt="product-img" />
+                    <p>${cartItem.title}</p>
+                    <span>${cartItem.quantity}</span>
+                    <i class="bi bi-trash3"></i>
+                </div>
+            `;
+        });
+    }
+    else {
+        modalBox.innerHTML = `
+            <h1>Your cart is empty</h1>
+        `;
+    }
+};
+displayCartItems();
 const openCart = () => {
     cartModalWrapper.classList.remove("d-none");
     displayCartItems();
@@ -64,17 +85,3 @@ const closeCart = () => {
 };
 openCartBtn.addEventListener("click", () => openCart());
 closeCartBtn.addEventListener("click", () => closeCart());
-const displayCartItems = () => {
-    modalBox.innerHTML = "";
-    cart.forEach((cartItem) => {
-        modalBox.innerHTML += `
-            <div class="cart-item">
-                <img src="${cartItem.image}" alt="product-img" />
-                <p>${cartItem.title}</p>
-                <span>${cartItem.quantity}</span>
-                <i class="bi bi-trash3"></i>
-            </div>
-        `;
-    });
-};
-displayCartItems();

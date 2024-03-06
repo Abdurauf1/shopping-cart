@@ -7,7 +7,8 @@ interface Product {
 };
 
 const productCountEl = document.querySelector(".product-count") as HTMLSpanElement;
-const openCartBtn = document.querySelector(".open-cart-btn") as HTMLButtonElement;
+const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLDivElement;
+const openCartBtn = document.querySelector(".open-cart-btn") as HTMLLIElement;
 const closeCartBtn = document.querySelector(".bi-x") as HTMLElement;
 const cartModalWrapper = document.querySelector(".cart-modal-wrapper") as HTMLDivElement;
 const modalBox = document.querySelector(".modal-box") as HTMLDivElement;
@@ -16,19 +17,18 @@ let productCount: number = 0;
 let data: Product[] = [];
 let cart: Product[] = [];
 
-
 productCountEl.textContent = productCount.toString();
 
 const fetchProducts = async (): Promise<void> => {
     const response = await fetch("https://fakestoreapi.com/products/");
     data = await response.json();
     displayCards();
+
 }
 
 const displayCards = (): void => {
     data.forEach((product: Product) => {
         const card = document.createElement("div") as HTMLDivElement;
-        const cardsWrapper = document.querySelector(".cards-wrapper") as HTMLDivElement;
 
         card.classList.add("card");
 
@@ -63,6 +63,29 @@ const addToCart = (product: Product): void => {
     productCountEl.textContent = productCount.toString();
 }
 
+const displayCartItems = (): void => {
+    modalBox.innerHTML = "";
+
+    if (cart.length > 0) {
+        cart.forEach((cartItem: Product) => {
+            modalBox.innerHTML += `
+                <div class="cart-item">
+                    <img src="${cartItem.image}" alt="product-img" />
+                    <p>${cartItem.title}</p>
+                    <span>${cartItem.quantity}</span>
+                    <i class="bi bi-trash3"></i>
+                </div>
+            `;
+        });
+    } else {
+        modalBox.innerHTML = `
+            <h1>Your cart is empty</h1>
+        `;
+    }
+};
+
+displayCartItems();
+
 const openCart = () => {
     cartModalWrapper.classList.remove("d-none");
     displayCartItems();
@@ -74,20 +97,3 @@ const closeCart = () => {
 
 openCartBtn.addEventListener("click", () => openCart());
 closeCartBtn.addEventListener("click", () => closeCart());
-
-const displayCartItems = (): void => {
-    modalBox.innerHTML = "";
-
-    cart.forEach((cartItem: Product) => {
-        modalBox.innerHTML += `
-            <div class="cart-item">
-                <img src="${cartItem.image}" alt="product-img" />
-                <p>${cartItem.title}</p>
-                <span>${cartItem.quantity}</span>
-                <i class="bi bi-trash3"></i>
-            </div>
-        `;
-    });
-};
-
-displayCartItems();
